@@ -8,9 +8,7 @@ const rl = readline.createInterface({
 });
 
 let questions = [
-    '\nWhat do you want to call your post?\n>',
-    '\nWrite a 1-2 sentence description for your post.\n>',
-    '\nThanks! What is the filepath for your image?\n>',
+    '\nWhat\'s the name of your image?\n>',
 ];
 
 newPost()
@@ -31,27 +29,26 @@ function newPost() {
     }
     
     let title = answers[0];
-    let description = answers[1];
-    let image = answers[2];
+    let tag = answers[1];
     // close at the end
     rl.close();
 
     const filePath = generateFilePath( title );
-    const content = generateContent(title,image,description);
+    const content = generateContent(title);
     fs.writeFile(filePath, content, { flag: 'w+' }, (err) => {
         if (err) return console.log(err);
         console.log(`Created ${filePath}`);
     });
 
-    console.log(`\nThanks! Here's your post so far:\nTitle: ${title}\nDescription: ${description}\nImage: ${image}\n`);
 })();
 };
 
 function generateFilePath(name) {
-    return path.join(__dirname, '..', 'comic', `${name}.md`);
+    const result = `${name}`.replaceAll(" ", "-").toLowerCase()+'.md';
+    return path.join(__dirname, '..', `gallery`, result);
 }
 
-function generateContent(title,image,description) {
-    return `---\ntitle: ${title}\nimages: ['${image}']\ntags: \ndescription: ${description}\ndate: ${ now }\n---`;
+function generateContent(title) {
+    return `---\ntitle: ${title}\nimages: [''] \ndate: ${ now }\npermalink: false \n---`;
 }
 
