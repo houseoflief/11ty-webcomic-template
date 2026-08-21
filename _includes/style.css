@@ -16,6 +16,7 @@
   --bg-color: #8A3511;
   --text-color: #8A3511;
   --content-bg: #FFebca;
+  --footer: #FFebca;
   --border-color: #BF742F;
   --link-color: #3C4022;
   --link-color-hover: #616837;
@@ -92,7 +93,7 @@ header nav a {
 /* FOOTER */
 
 footer {
-  color: var(--content-color);
+  color: var(--footer);
   margin-top: 2rem;
   margin-bottom: 1rem;
   display: flex;
@@ -106,6 +107,9 @@ footer p {
   margin: auto;
 }
 
+footer a {
+  color: var(--footer);
+}
 /* COMIC */
 .comic h1 {
   text-align: center;
